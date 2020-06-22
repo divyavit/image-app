@@ -15,7 +15,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',
 useNewUrlParser: true
 })
 mongoose.connection;
-app.use((req, res, next) =>{
+app.use('/uploads', cloudiRouter);
+app.use('/',(req,res)=> {
+    console.log("connected to mongo db ");
+});
+/*app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
     if(req.method === 'OPTIONS'){
@@ -24,7 +28,7 @@ app.use((req, res, next) =>{
     }
     next();
 });
-app.use('/uploads', cloudiRouter);
+
 app.use((req, res, next) => {
     const error = new Error('NOT FOUND')
     error.status = 404
@@ -37,6 +41,6 @@ app.use((error, req, res, next) => {
         message: error.message
         }
     })
-})
+})*/
         
 module.exports = app
