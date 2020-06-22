@@ -15,5 +15,5 @@ let storage = multer.diskStorage({
         }
 });
 let upload = multer({storage:storage});
-//let upload = util.promisify(uploadFilesMiddleware);
 module.exports = upload;
+

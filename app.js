@@ -8,7 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-mongoose.connect(process.env.MONGODB_URI||'mongodb://localhost:27017',
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',
 {
 //useUnifiedTopology: true 
 useNewUrlParser: true
