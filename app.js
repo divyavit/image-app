@@ -15,10 +15,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',
 useNewUrlParser: true
 })
 mongoose.connection;
-app.use('/uploads', cloudiRouter);
 app.use('/',(req,res)=> {
     console.log("connected to mongo db ");
 });
+app.use('/uploads', cloudiRouter);
+
 /*app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
