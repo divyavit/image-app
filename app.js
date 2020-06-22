@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let path = require('path');
 var cloudiRouter = require('./imageRoutes');
 let app = express();
+let port = process.env.PORT || 4000;
 let mongoose = require('mongoose');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
@@ -43,5 +44,8 @@ app.use((error, req, res, next) => {
         }
     })
 })*/
+app.listen(port,() => {
+    console.log(`Server running on ${port}`);
+});
         
 module.exports = app
