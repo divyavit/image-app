@@ -1,9 +1,9 @@
+require('dotenv').config();
 let express = require('express');
 let bodyParser = require('body-parser');
 let path = require('path');
 var cloudiRouter = require('./imageRoutes');
 let app = express();
-require('dotenv').config()
 let port = process.env.PORT || 4000;
 let mongoose = require('mongoose');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -11,16 +11,13 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',
-{
-//useUnifiedTopology: true 
-useNewUrlParser: true
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',{ useNewUrlParser: true})
 let db = mongoose.connection;
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
 app.use('/',(req,res)=> {
     console.log("connected to mongo db ");
+    res.json("connected and working succesfully");
 });
 app.use('/uploads', cloudiRouter);
 
