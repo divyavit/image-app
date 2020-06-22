@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let path = require('path');
 var cloudiRouter = require('./imageRoutes');
 let app = express();
+require('dotenv').config()
 let port = process.env.PORT || 4000;
 let mongoose = require('mongoose');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,7 +16,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',
 //useUnifiedTopology: true 
 useNewUrlParser: true
 })
-mongoose.connection;
+let db = mongoose.connection;
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('connected to database'))
 app.use('/',(req,res)=> {
     console.log("connected to mongo db ");
 });
