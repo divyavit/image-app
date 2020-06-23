@@ -14,6 +14,7 @@ router.get('/getLatest', async (req, res) => {
         let images = await imageModel.find().skip(page * 10).limit(10).sort({ _id: -1 });
         console.log("image db",images);
         res.json(images);
+        res.end();
     }
     catch(err) {
         console.log("err", err);
