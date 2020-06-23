@@ -7,6 +7,7 @@ let router = express.Router();
 router.post('/addImage', upload.any(), imageController.createApp);
 
 router.get('/getLatest', async (req, res) => {
+    console.log("in get latest");
     let page = req.query.page ? parseInt(req.query.page) : 0;
     console.log("page no",page);
     let images = await imageModel.find().skip(page * 10).limit(10).sort({ _id: -1 });

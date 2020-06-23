@@ -15,12 +15,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017',{ useNew
 let db = mongoose.connection;
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
-app.use('/',(req,res)=> {
+
+app.use('/uploads', cloudiRouter);
+
+app.get('/',(req,res)=> {
     console.log("connected to mongo db ");
     res.json("connected and working succesfully");
 });
-app.use('/uploads', cloudiRouter);
-
 /*app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -45,6 +46,7 @@ app.use((error, req, res, next) => {
     })
 })*/
 app.listen(port,() => {
+    console.log("port is ",port);
     console.log(`Server running on ${port}`);
 });
         
