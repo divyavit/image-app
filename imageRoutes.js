@@ -8,12 +8,16 @@ router.post('/addImage', upload.any(), imageController.createApp);
 
 router.get('/getLatest', async (req, res) => {
     console.log("in get latest");
-    let page = req.query.page ? parseInt(req.query.page) : 0;
-    console.log("page no",page);
-    let images = await imageModel.find().skip(page * 10).limit(10).sort({ _id: -1 });
-    console.log("image db",images);
-    console.log("res",res);
-    res.json(images);
+    try{    
+        let page = req.query.page ? parseInt(req.query.page) : 0;
+        console.log("page no",page);
+        let images = await imageModel.find().skip(page * 10).limit(10).sort({ _id: -1 });
+        console.log("image db",images);
+        res.json(images);
+    }
+    catch(err) {
+        console.log("err", err);
+    }
 });
 
 router.post('/comment/:id', async (req, res) => {
